@@ -1,0 +1,10 @@
+.page__link{
+  text-decoration: none;
+}
+
+.page__link:visited{
+  color: white;
+}
+.page__link:hover {
+  opacity: 0.6;
+}

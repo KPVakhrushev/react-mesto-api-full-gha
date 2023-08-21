@@ -1,0 +1,21 @@
+.popup__content_type_tooltip{
+  width: 430px;
+  height: 330px;
+  align-items: center;
+  justify-content: space-between;
+
+  text-align: center;
+
+  background-color: white;
+  border-radius: 10px;
+  padding: 60px 34px;
+  box-sizing: border-box;
+}
+
+@media screen and (max-width:600px) {
+  .popup__content_type_form {
+    margin: auto 19px;
+    padding: 25px 22px;
+    width: 100%;
+  }
+}

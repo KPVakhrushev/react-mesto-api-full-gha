@@ -1,0 +1,25 @@
+import { Link } from 'react-router-dom';
+import React from 'react';
+function Register({onSubmit}){
+  const [email, setEmail] = React.useState('');
+  const [password,  setPassword] = React.useState('');
+  function handleSubmit(e) {
+    e.preventDefault();
+    onSubmit({ email, password });
+  }
+  return (
+    <div className="login">
+      <h2 className="login__title">Регистрация</h2>
+      <form className="login__form" id="" name="login" action="" method="post" onSubmit={handleSubmit}>
+        <input className="login__input" name="email"    id="input-login"     type="email"    minLength="1" maxLength="40"  required placeholder="Email"  value={email}    onChange={(e)=>setEmail(e.target.value)} />
+        <input className="login__input" name="password" id="input-password"  type="password" minLength="1" maxLength="200" required placeholder="Пароль" value={password} onChange={(e)=>setPassword(e.target.value)}  autoComplete="on"/>
+        <button type="submit" className="login__button" title="" >Зарегистрироваться</button>
+      </form>
+      <h2 className='login__subtitle'>
+        Уже зарегистрированы?&nbsp;
+        <Link className='page__link' to='/sign-in'>Войти</Link>
+      </h2>
+    </div>
+  );
+}
+export default Register;

@@ -1,0 +1,13 @@
+.header__logout{
+  color: #A9A9A9;
+  margin: 0 0 0 20px;
+}
+
+.header__logout:visited{
+  color: #A9A9A9;
+}
+@media screen and (max-width:600px) {
+  .header__logout {
+    margin: 18px 0 0 0;
+  }
+}

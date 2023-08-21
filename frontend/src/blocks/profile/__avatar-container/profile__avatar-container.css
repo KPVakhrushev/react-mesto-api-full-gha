@@ -1,0 +1,23 @@
+.profile__avatar-container{
+  position: relative;
+  z-index: 0;
+  width: 120px;
+  height: 120px;
+  flex-shrink: 0;
+}
+.profile__avatar-container:before{
+  content: "";
+  display: block;  /* По умолчанию элемент будет inline(т.е. текстовый), и на него НЕ будут действовать параметры ширины и высоты */
+  width: 100%; /* без задания высоты и шширины блок займет размеры в соответсвии с контентом, а он пустой*/
+  height: 100%;
+  background-color: #000;
+  z-index: 1;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: opacity 0.5s linear;
+}
+.profile__avatar-container:hover:before{
+  opacity: 0.8;
+}

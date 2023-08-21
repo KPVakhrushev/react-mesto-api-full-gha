@@ -1,0 +1,15 @@
+.header__line{
+  width:100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 1px solid rgba(84,84,84,0.7);
+  box-sizing: border-box;
+  padding: 45px 0 41px;
+}
+
+@media screen and (max-width:600px) {
+  .header__line {
+    padding: 27px 30px 31px;
+  }
+}

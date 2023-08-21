@@ -1,0 +1,25 @@
+.login__button {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+
+  background-color: white;
+  color: black;
+  height: 50px;
+  width: 100%;
+  margin: 216px 0 0;
+  border-radius: 2px;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.popup__save-button:hover {
+  opacity: 0.8;
+}
+
+@media screen and (max-width:600px) {
+  .login__button {
+    margin: 173px 0 0;
+  }
+}

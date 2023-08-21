@@ -1,0 +1,8 @@
+.element {
+  background-color: #FFF;
+  color: black;
+  clip-path: inset(0 round 10px);
+  display: grid;
+  grid-template-columns: auto 42px;
+  position: relative;
+}
