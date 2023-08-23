@@ -12,8 +12,8 @@ module.exports = [
     throw new ErrorNotfound('Страница не найдена');
   },
   /* ошибки без кода */
-  (err, req, res, next) => {    
-    if(err.code) return (next(err));
+  (err, req, res, next) => {
+    if (err.code) return (next(err));
     if (err.name === 'CastError' || err.name === 'ValidationError') {
       throw new ErrorValidation(err.message);
     }
@@ -25,5 +25,5 @@ module.exports = [
   (err, req, res, next) => {
     res.status(err.code).send({ message: err.message });
     next();
-  }
-]
+  },
+];
