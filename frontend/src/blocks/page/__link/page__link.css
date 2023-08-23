@@ -1,5 +1,6 @@
 .page__link{
   text-decoration: none;
+  color: white;
 }
 
 .page__link:visited{
