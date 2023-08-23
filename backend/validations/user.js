@@ -10,7 +10,7 @@ const updateKeys = {
 };
 const authKeys = {
   email: Joi.string().email().required(),
-  password: Joi.string().min(8).required(),
+  password: Joi.string().min(3).required(),
 };
 const allKeys = {
   ...authKeys,

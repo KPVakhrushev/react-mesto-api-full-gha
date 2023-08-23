@@ -5,7 +5,7 @@ const User = require('../models/user');
 const ErrorNotfound = require('../errors/ErrorNotfound');
 const ErrorConflict = require('../errors/ErrorConflict');
 const ErrorUnauthorized = require('../errors/ErrorUnauthorized');
-const { SECRET, TOKEN_EXPIRES_IN } = require('../utils/constants');
+const { SECRET, TOKEN_EXPIRES_IN } = process.env;
 
 const sendUserOrError = (user, res, next) => {
   if (user) res.send(user);
@@ -53,7 +53,7 @@ module.exports.updateAvatar = (req, res, next) => {
 };
 module.exports.login = (req, res, next) => {
   const { email, password } = req.body;
-  User.findOne({ email }).select('password')
+  User.findOne({ email }).select('+password')
     .then((user) => {
       const authenticated = user && bcrypt.compareSync(password, user.password);
       if (!authenticated) throw new ErrorUnauthorized();
@@ -61,4 +61,7 @@ module.exports.login = (req, res, next) => {
       res.cookie('jwt', token, { maxAge: TOKEN_EXPIRES_IN * 1000, httpOnly: true }).send(user);
     })
     .catch(next);
+};
+module.exports.logout = (req, res, next) => {
+  res.clearCookie('jwt').end();
 };

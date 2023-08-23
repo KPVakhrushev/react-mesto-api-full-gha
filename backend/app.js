@@ -2,53 +2,34 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
+const rateLimit = require('express-rate-limit')
 
+const authRouter = require('./routes/auth');
 const usersRouter = require('./routes/users');
 const cardsRouter = require('./routes/cards');
-const { createUser, login } = require('./controllers/users');
-
-const ErrorValidation = require('./errors/ErrorValidation');
-const ErrorNotfound = require('./errors/ErrorNotfound');
-const ErrorDefault = require('./errors/ErrorDefault');
-const validationUser = require('./validations/user');
 
 const auth = require('./middlewares/auth');
+const cors = require('./middlewares/cors');
+const errors = require('./middlewares/errors');
+const { requestLogger } = require('./middlewares/logger');
 
 const {
   PORT = 3000,
   DB_CONNECTION = 'mongodb://localhost:27017/mydb',
 } = process.env;
+const limiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 100})
 
 const app = express();
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cookieParser());
-
 mongoose.connect(DB_CONNECTION); // mongoose.set('debug', true);
 
-app.post('/signin', validationUser.authCheck(), validationUser.errors(), login);
-app.post('/signup', validationUser.fullCheck(), validationUser.errors(), createUser);
-
+app.get('/crash-test', () =>  setTimeout(() => { throw new Error('Сервер сейчас упадёт'); }, 0) );
+app.use(limiter)
+app.use(bodyParser.json(), bodyParser.urlencoded({ extended: true }), cookieParser());
+app.use(requestLogger);
+app.use(cors);
+app.use('/', authRouter);
 app.use('/users', auth, usersRouter);
 app.use('/cards', auth, cardsRouter);
-app.use(() => { throw new ErrorNotfound('Страница не найдена'); });
-app.use((err, req, res, next) => {
-  console.log('ERROR: ', err.message);
-  if (!err.code) {
-    if (err.name === 'CastError') {
-      throw new ErrorValidation(err.message);
-    }
-    if (err.name === 'ValidationError') {
-      throw new ErrorValidation(err.message);
-    }
-    throw new ErrorDefault();
-  } else next(err);
-});
-app.use((err, req, res, next) => {
-  res.status(err.code).send({ message: err.message });
-  next();
-});
+app.use(errors);
 
-app.listen(PORT, () => {
-  console.log(`App listening on port ${PORT}`);
-});
+app.listen(PORT, console.log(`App listening on port ${PORT}`));
