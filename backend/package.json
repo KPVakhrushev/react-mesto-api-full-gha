@@ -1,5 +1,5 @@
 {
-  "name": "13-express-mesto-gha",
+  "name": "pr15-mesto-backend",
   "version": "1.0.0",
   "description": "Проект Mesto бэкенд",
   "main": "app.js",
@@ -12,14 +12,14 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "devDependencies": {
-    "dotenv": "^16.3.1",
+  "devDependencies": {    
     "eslint": "^8.2.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.25.2",
     "nodemon": "^3.0.1"
   },
   "dependencies": {
+    "dotenv": "^16.3.1",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.2",
     "celebrate": "^15.0.1",
