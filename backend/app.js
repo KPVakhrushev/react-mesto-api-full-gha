@@ -13,15 +13,11 @@ const auth = require('./middlewares/auth');
 const cors = require('./middlewares/cors');
 const errors = require('./middlewares/errors');
 const { requestLogger } = require('./middlewares/logger');
-
-const {
-  PORT = 3000,
-  DB_CONNECTION = 'mongodb://localhost:27017/mydb',
-} = process.env;
-const limiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 100})
+const { PORT, DB_CONNECTION, LIMITER} = require('./config');
+const limiter = rateLimit(LIMITER)
 
 const app = express();
-mongoose.connect(DB_CONNECTION); // mongoose.set('debug', true);
+mongoose.connect(DB_CONNECTION);
 
 app.get('/crash-test', () =>  setTimeout(() => { throw new Error('Сервер сейчас упадёт'); }, 0) );
 app.use(limiter)

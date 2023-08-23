@@ -1,9 +1,8 @@
-const { CORS_ALLOW_METHODS, CORS_ALLOW_ORIGIN } = process.env;
+const { CORS_ALLOW_METHODS, CORS_ALLOW_ORIGIN } = require('../config');;
 
 module.exports = function(req, res, next) {
   const { origin } = req.headers;
-  const allowOrigin = CORS_ALLOW_ORIGIN.split(', ');
-  if (allowOrigin.includes(origin)) {
+  if ( [origin, '*'].some(v => CORS_ALLOW_ORIGIN.includes(v)) ) {
     res.header('Access-Control-Allow-Origin', origin);
     res.header('Access-Control-Allow-Credentials', true);
   }

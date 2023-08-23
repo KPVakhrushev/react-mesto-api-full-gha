@@ -5,7 +5,7 @@ const User = require('../models/user');
 const ErrorNotfound = require('../errors/ErrorNotfound');
 const ErrorConflict = require('../errors/ErrorConflict');
 const ErrorUnauthorized = require('../errors/ErrorUnauthorized');
-const { SECRET, TOKEN_EXPIRES_IN } = process.env;
+const { SECRET, TOKEN_EXPIRES_IN } = require('../config');
 
 const sendUserOrError = (user, res, next) => {
   if (user) res.send(user);

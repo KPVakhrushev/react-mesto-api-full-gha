@@ -1,7 +1,7 @@
 const {
   Joi, celebrate, Segments, errors,
 } = require('celebrate');
-const { URL_REGEX } = require('../utils/constants');
+const { URL_REGEX } = require('../config');
 
 const keys = {
   name: Joi.string().required().min(2).max(30),
